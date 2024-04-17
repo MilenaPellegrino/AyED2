@@ -9,7 +9,7 @@
 
 void print_help(char *program_name) {
     /* Print the usage help of this program. */
-    printf("Usage: %s <input file path>\n\n"
+    printf("Usage: %s <inpmilenapellegrinoch@gmail.comut file path>\n\n"
            "Loads an array given in a file in disk and prints it on the screen."
            "\n\n"
            "The input file must have the following format:\n"
@@ -25,10 +25,7 @@ void print_help(char *program_name) {
 }
 
 char *parse_filepath(int argc, char *argv[]) {
-    /* Parse the filepath given by command line argument. */
     char *result = NULL;
-    // Program takes exactly two arguments
-    // (the program's name itself and the input-filepath)
     bool valid_args_count = (argc == 2);
 
     if (!valid_args_count) {
@@ -77,8 +74,6 @@ void array_dump(int a[], unsigned int length) {
 
 int main(int argc, char *argv[]) {
     char *filepath = NULL;
-
-    /* parse the filepath given in command line arguments */
     filepath = parse_filepath(argc, argv);
     
     /* create an array of MAX_SIZE elements */
