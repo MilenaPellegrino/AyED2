@@ -55,13 +55,36 @@ int main(int argc, char *argv[]) {
   printf("Original: ");
   array_dump(array, length);
 
-  int *new_array=NULL;
-  /**
-  *
-  *  --- COMPLETAR ----
-  *
-  */
+    stack s = stack_empty();
+
+    // Insertamos los elementos del array en el stack:
+    for (unsigned int i = 0; i < length; i++) {
+        s = stack_push(s, array[i]);
+    }
+
+    // Creamos el nuevo array que vamos a retornar
+    int* new_array = (int*)malloc(length * sizeof(int));
+
+    if (new_array == NULL) {
+        fprintf(stderr, "Error al reservar memoria para el nuevo array \n");
+        s = stack_destroy(s);
+        return EXIT_FAILURE;
+    }
+
+
+    for (unsigned int i = 0; i < length; i++) {
+        new_array[i] = stack_top(s);
+        s = stack_pop(s);
+    }
+
+    s = stack_destroy(s);
+
+     if(new_array == NULL){
+        return (EXIT_FAILURE);
+    }
+  
   printf("Reversed: ");
   array_dump(new_array, length);
+  free(new_array);
   return (EXIT_SUCCESS);
 }
