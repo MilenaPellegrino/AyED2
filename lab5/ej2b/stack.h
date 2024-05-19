@@ -7,15 +7,26 @@
 
 #include <stdbool.h>
 
+// Definición del tipo de elemento de la pila
+typedef int stack_elem;
+
+// Definición del nodo de la pila
+typedef struct _s_stack_node {
+    stack_elem e;
+    struct _s_stack_node *next;
+} stack_node;
+
+// Definición del stack_t
+typedef struct {
+    stack_node *top;
+    unsigned int size_act;
+} stack_t;
+
+;
 /**
 * @brief Stack type definition
 */
-typedef struct _s_stack *stack;
-
-/**
-* @brief Stack elements type definition
-*/
-typedef int stack_elem;
+typedef stack_t* stack;
 
 /**
 * @brief Creates an empty stack
@@ -76,6 +87,5 @@ stack_elem *stack_to_array(stack s);
 * @note All memory resources are freed
 */
 stack stack_destroy(stack s);
-
 
 #endif
