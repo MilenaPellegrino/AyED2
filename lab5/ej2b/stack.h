@@ -22,7 +22,6 @@ typedef struct {
     unsigned int size_act;
 } stack_t;
 
-;
 /**
 * @brief Stack type definition
 */
