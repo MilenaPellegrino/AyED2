@@ -26,15 +26,17 @@ struct _hanoi {
 hanoi_t hanoi_init(unsigned int disk_count) {
     hanoi_t hanoi = malloc(sizeof(struct _hanoi));
     assert(hanoi != NULL);
-    hanoi->aux = stack_empty();
-    hanoi->target = NULL;
+
+    /* No estabamos inicializando los stacks*/
+    hanoi->source = stack_empty();  // Inicializar la pila source
+    hanoi->aux = stack_empty();     // Inicializar la pila aux
+    hanoi->target = stack_empty();  // Inicializar la pila target
     hanoi->disk_count = disk_count;
     for (unsigned int i = disk_count; i > 0; --i) {
         hanoi->source = stack_push(hanoi->source, i);
     }
     return hanoi;
 }
-
 void hanoi_solve(hanoi_t hanoi) {
     move(hanoi->disk_count, hanoi, &hanoi->source,
         &hanoi->target, &hanoi->aux);
@@ -46,7 +48,11 @@ void hanoi_print(hanoi_t hanoi) {
 
 hanoi_t hanoi_destroy(hanoi_t hanoi) {
     assert(hanoi != NULL);
-    free(hanoi);
+    /* Destruir las pilas que inicializamos anteriormente */
+    hanoi->source = stack_destroy(hanoi->source);  // Destruir la pila source
+    hanoi->aux = stack_destroy(hanoi->aux);        // Destruir la pila aux
+    hanoi->target = stack_destroy(hanoi->target);  // Destruir la pila target
+    free(hanoi);  // Liberar la estructura hanoi
     return NULL;
 }
 
