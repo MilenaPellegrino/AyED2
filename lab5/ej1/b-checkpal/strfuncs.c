@@ -30,7 +30,7 @@ char *string_filter(const char *str, char c){
 
     size_t len = string_length(str);
 
-    char *res = (char *)malloc(len + 1); 
+    char *res = malloc(sizeof(char) * len); 
     if (res!= NULL) {
         size_t i = 0;
         size_t j = 0;
