@@ -92,7 +92,24 @@ queue queue_dequeue(queue q) {
     return q;
 
 }
-
+// Implementacion nueva
+// ACLARACION: Cambie el tipo de unsigned int de la funcion a int
+queue queue_disscard(queue q, int n) {
+    assert(invrep(q) && n < q->size);
+    if (n == 0) return queue_dequeue(q);
+    struct s_node *current = q->front;
+    for (int i = 0; i < n - 1; ++i) {
+        current = current->next;
+    }
+    struct s_node *temp = current->next;
+    current->next = temp->next;
+    if (temp == q->back) {
+        q->back = current;
+    }
+    free(temp);
+    q->size--;
+    return q;
+}
 void queue_dump(queue q, FILE *file) {
     file = file==NULL ? stdout: file;
     struct s_node *node=q->front;

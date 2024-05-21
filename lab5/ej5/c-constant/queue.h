@@ -59,7 +59,7 @@ queue queue_dequeue(queue q);
  *
  */
 
-queue queue_disscard(queue q, unsigned int n);
+queue queue_disscard(queue q, int n);
 /*
  * DESC: Remove the n-th element of the queue 'q'
  *

@@ -33,7 +33,8 @@ queue queue_from_file(const char *filepath) {
 }
 
 queue queue_user_disscard(queue q) {
-    unsigned int size=queue_size(q), disscard=0u;
+    unsigned int size=queue_size(q);
+    int disscard = 0;
     int res=0;
     assert(size > 0);
     printf("\n"
@@ -42,7 +43,7 @@ queue queue_user_disscard(queue q) {
     queue_dump(q, stdout);
     do {
         printf("\nElija un elemento del 0-%u: ", size - 1);
-        res=scanf("%u", &disscard);
+        res=scanf("%d", &disscard);
         if (res != 1 || disscard >= size) {
             printf("Elemento inválido!\n");
         }
