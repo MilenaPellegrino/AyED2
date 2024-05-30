@@ -60,7 +60,7 @@ pqueue pqueue_enqueue(pqueue q, pqueue_elem e, unsigned int priority) {
     } else { // Recorremos la pqueue q hasta encontrar el lugar donde vamos a insertar este nuevo elemento
        struct s_node *aux = q->head;
        struct s_node *pred = NULL;
-        while(aux!=NULL && aux->priority >= priority ){
+        while(aux!=NULL && aux->priority <= new_node->priority ){
             pred = aux;
             aux = aux->next;
         }
@@ -69,15 +69,15 @@ pqueue pqueue_enqueue(pqueue q, pqueue_elem e, unsigned int priority) {
             new_node->next = q->head;
             q->head = new_node;
         } else {
-            new_node->next = aux;
             pred->next = new_node;
+            new_node->next = aux;
         }
     }
     q->length++;
-    destroy_node(new_node);
     assert(invrep(q) && !pqueue_is_empty(q));
     return q;
 }
+
 
 bool pqueue_is_empty(pqueue q) {
     assert(invrep(q));
@@ -103,7 +103,11 @@ unsigned int pqueue_size(pqueue q) {
 
 pqueue pqueue_dequeue(pqueue q) {
     assert(invrep(q) && !pqueue_is_empty(q));
+    struct s_node *eliminar = create_node(q->head->elem, q->head->priority);
+    eliminar = q->head;
     q->head = q->head->next;
+    destroy_node(eliminar);
+    q->length--;
     assert(invrep(q)); 
     return q;
 }
