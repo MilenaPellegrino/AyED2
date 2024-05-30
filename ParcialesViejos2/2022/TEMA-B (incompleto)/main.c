@@ -36,14 +36,7 @@ pstack pstack_from_file(const char *filepath) {
         exit(EXIT_FAILURE);
     }
     int res = 0, empty_flag=0;
-    unsigned int min_allowed_priority=0u;
-    res = fscanf(file,"max_priority: %u\n", &min_allowed_priority);
-    if(res != 1)
-    {
-        fprintf(stderr, "pstack max allowed priority missing\n");
-        exit(EXIT_FAILURE);
-    }
-    pstack s = pstack_empty(min_allowed_priority);
+    pstack s = pstack_empty();
     while (!feof(file) && !empty_flag) {
         pstack_elem patient_id = 0;
         unsigned int priority = 0;
@@ -58,13 +51,31 @@ pstack pstack_from_file(const char *filepath) {
     return s;
 }
 
+void dump_priority(priority_t p) {
+    if (p==worst) {
+        fprintf(stdout, "worst priority");
+    } else if (p==low) {
+        fprintf(stdout, "low priority");
+    } else if (p==normal) {
+        fprintf(stdout, "normal priority");
+    } else if (p==high) {
+        fprintf(stdout, "high priority");
+    } else if (p==best) {
+        fprintf(stdout, "best priority");
+    } else {
+        fprintf(stdout, "not valid priority");
+    }
+}
 
 void pstack_dump(pstack s) {
-    size_t length = pstack_size(s);
-    fprintf(stdout, "length: %lu\n", length);
+    unsigned int length = pstack_size(s);
+    fprintf(stdout, "length: %u\n", length);
     fprintf(stdout, "[ ");
     while(!pstack_is_empty(s)) {
-        fprintf(stdout, "(%u, %u)", pstack_top(s), pstack_top_priority(s));      
+        fprintf(stdout, "(%u, ", pstack_top(s));
+        dump_priority(pstack_top_priority(s));
+        fprintf(stdout, ")");
+        
         s = pstack_pop(s);
         if (!pstack_is_empty(s)) {
             fprintf(stdout, ", ");
@@ -81,13 +92,12 @@ int main(int argc, char *argv[]) {
 
     /* get the dequeue from the file */
     pstack s = pstack_from_file(filepath);
-    pstack s2 = pstack_from_file(filepath);
+
     /* call the function for show the priority stack elements */
     pstack_dump(s);
 
     /* destroy instance of pstack */
     s = pstack_destroy(s);
-    s2 = pstack_destroy(s2);
 
     return (EXIT_SUCCESS);
 }

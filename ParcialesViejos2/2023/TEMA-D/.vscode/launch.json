@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/mile/Documents/Facu/algo2/ParcialesViejos2/2022/TEMA-D",
-      "program": "/home/mile/Documents/Facu/algo2/ParcialesViejos2/2022/TEMA-D/build/Debug/outDebug",
+      "cwd": "/home/mile/Documents/Facu/algo2/ParcialesViejos2/2023/TEMA-D",
+      "program": "/home/mile/Documents/Facu/algo2/ParcialesViejos2/2023/TEMA-D/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

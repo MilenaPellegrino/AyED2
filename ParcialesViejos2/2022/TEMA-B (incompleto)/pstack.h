@@ -7,11 +7,11 @@ typedef struct s_pstack * pstack;
 
 typedef unsigned int pstack_elem;
 
-typedef unsigned int priority_t;
+typedef enum {worst, low, normal, high, best} priority_t;
 
-pstack pstack_empty(priority_t max_priority);
+pstack pstack_empty(void);
 /*
- * DESC: Creates a new instance of pstack with 'max_priority' limit
+ * DESC: Creates a new instance of pstack
  *
  * PRE: {true}
  *  s = pstack_empty();
@@ -22,9 +22,8 @@ pstack pstack_empty(priority_t max_priority);
 pstack pstack_push(pstack s, pstack_elem e, priority_t priority);
 /*
  * DESC: Adds element 'e' into the pstack 's' with the given 'priority'
- *       
  *
- * PRE: {s --> pstack && priority <= s --> max_priority }
+ * PRE: {s --> pstack}
  *  s = pstack_push(s, e, priority);
  * POS: {s --> pstack && !pstack_is_empty(s)}
  *
@@ -36,7 +35,7 @@ bool pstack_is_empty(pstack s);
  *
  */
 
-size_t pstack_size(pstack s);
+unsigned int pstack_size(pstack s);
 /*
  * DESC: Return the number of elements inside the pstack 's'
  *
