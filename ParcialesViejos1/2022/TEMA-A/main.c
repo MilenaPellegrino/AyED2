@@ -21,8 +21,8 @@ void print_help(char *program_name) {
            "Load flight data from a given file in disk.\n"
            "\n"
            "The input file must exist in disk and every line in it must have the following format:\n\n"
-           "<code> <arrival-hour> <item-type> <amount-items> <item-type> <amount-items>\n\n"
-           "Those elements will be copied into the multidimensional array 'a'.\n"
+           "<code> <flight type> <hour> <passengers> <flight type> <hour> <passengers>\n\n"
+           "Those elements must be integers and will be copied into the multidimensional integer array 'a'.\n"
            "\n\n",
            program_name);
 }
@@ -64,15 +64,15 @@ int main(int argc, char *argv[]) {
     filepath = parse_filepath(argc, argv);
 
     /* create an array with the type of flight */
-    DeliveryTable array;
+    LayoverTable array;
 
     /* parse the file to fill the array and obtain the actual length */
     array_from_file(array, filepath);
 
-    /* show the ordered array in the screen */
+    /* shows the data on the screen */
     array_dump(array);
 
-    printf("\nExtra fee cost: %u\n", extra_space_fee_cost(array, 20));
+    printf("\nAmount of passengers at %u:00 : %u\n", 10, passengers_amount_in_airport(array, 10));
 
     return (EXIT_SUCCESS);
 }

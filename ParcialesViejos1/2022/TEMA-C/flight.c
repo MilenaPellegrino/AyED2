@@ -12,8 +12,9 @@ Flight flight_from_file(FILE* file, char code, unsigned int arrival_hour)
     Flight flight;
     flight.code = code;
     flight.hour = arrival_hour;
-
-    /* COMPLETAR */
-
+    int res = fscanf(file, EXPECTED_FLIGHT_FILE_FORMAT, &flight.type, &flight.items_amount);
+    if(res!= AMOUNT_OF_FLIGHT_VARS){
+      fprintf(stderr, "Error al leer el archivo\n");
+    }
     return flight;
 }

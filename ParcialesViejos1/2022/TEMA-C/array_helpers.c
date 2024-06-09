@@ -30,9 +30,22 @@ void array_dump(DeliveryTable a) {
   }
 }
 
+
 unsigned int extra_space_fee_cost (DeliveryTable a, unsigned int h) {
-  /* COMPLETAR */
-  return 0;
+  unsigned int items_boxes = 0;
+  unsigned int items_letters = 0;
+  unsigned int cost = 0;
+  for(unsigned int hour = 0; hour<h; hour++){
+    items_boxes += a[boxes][hour].items_amount;
+    items_letters += a[letters][hour].items_amount;
+  }
+  if(items_boxes > MAX_ALLOWED_BOXES){
+    cost += (items_boxes - MAX_ALLOWED_BOXES) * BOX_PENALTY;
+  }
+  if(items_letters > MAX_ALLOWED_LETTERS){
+    cost += (items_letters - MAX_ALLOWED_BOXES) * LETTER_PENALTY;
+  }
+  return cost;
 }
 
 
@@ -47,20 +60,21 @@ void array_from_file(DeliveryTable array, const char *filepath) {
 
   char code;
   unsigned int arrival_hour;
-  int i = 0;
-  while (/* COMPLETAR: lectura completa de todos los datos */) {
-    int res = fscanf(/* COMPLETAR: lectura de codigo de vuelo */);
+  while (!feof(file)) {
+    int res = fscanf(file, "\n_%c_ ", &code);
     if (res != 1) {
       fprintf(stderr, "Invalid file.\n");
       exit(EXIT_FAILURE);
     }
-    int res = fscanf(/* COMPLETAR: lectura de hora de llegada */);
-    if (res != 1) {
+    int res2 = fscanf(file, " %u ", &arrival_hour);
+    if (res2 != 1) {
       fprintf(stderr, "Invalid file.\n");
       exit(EXIT_FAILURE);
     }
     /* COMPLETAR: Generar y guardar ambos Flight en el array multidimensional */
-    Flight flight_boxes = /* completar... */
-    Flight flight_letters = /* completar... */
+    Flight flight_boxes = flight_from_file(file, code, arrival_hour);
+    Flight flight_letters = flight_from_file(file, code, arrival_hour);
+    array[boxes][flight_boxes.hour-1] = flight_boxes;
+    array[letters][flight_letters.hour-1] = flight_letters;
   }
 }
