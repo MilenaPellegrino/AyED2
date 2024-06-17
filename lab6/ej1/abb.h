@@ -82,7 +82,8 @@ abb_elem abb_min(abb tree);
  * POS : {tree --> ABB && abb_exists(tree, min_e)}
  */
 
-void abb_dump(abb tree, abb_ordtype ord);
+// MODIFIQUE
+void abb_dump(abb tree);
 /* DESC: Shows the elements of `tree` on the screen. Elements are shown by
  * walking the tree using the Depth First Search (DFS) algorithm. The order
  * used to visit elements is given by `ord` as follows:

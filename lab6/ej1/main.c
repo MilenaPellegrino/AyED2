@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
     abb tree = abb_from_file(filepath);
 
     /*dumping the tree*/
-    abb_dump(tree, ABB_IN_ORDER);
+    abb_dump(tree);
     if (!abb_is_empty(tree)) {
         printf("\n");
         printf("raiz: %d\n minimo: %d\n maximo: %d\n", abb_root(tree),
