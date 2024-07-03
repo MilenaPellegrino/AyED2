@@ -1,3 +1,12 @@
+/*
+ACLARACION: el test "test_insert_after_90_minutes" no funciona, o sea da un error en el assert
+no se si deberia funcionar asi, y el que sigue no me da error y deberia, asi que no se si esta muy bien hecho 
+pero son las 2am y ya tenog sueno y no me lo puse a debuggear, si hay algun ser vivo leyendo esto y encuentra algun error 
+me gustaria que me lo diga jajsjasj
+
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
