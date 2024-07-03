@@ -1,3 +1,3 @@
 ## Algoritmos y estructuras de datos II 
 
-Laboratorios entregados y parciales resueltos de la materia. 
+Laboratorios entregados y examenes resueltos de la materia. 
